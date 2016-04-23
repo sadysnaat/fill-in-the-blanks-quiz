@@ -85,13 +85,23 @@ def print_game_complete():
     print_seperator()
 
 
+def get_level_from_command_prompt(message):
+    try:
+        # Avoid breaking the code if user enters
+        # level value other than int
+        user_choice = int(raw_input(message))
+    except ValueError:
+        user_choice = get_level_from_command_prompt(message)
+    return user_choice
+
+
 def choose_level():
     valid_levels = [1, 2, 3]
     message = ('Enter the level\n1 for Easy\n2 for Medium\n3 for Hard\n')
-    user_choice = int(raw_input(message))
+    user_choice = get_level_from_command_prompt(message)
     while user_choice not in valid_levels:
         print "Please select a valid level."
-        user_choice = int(raw_input(message))
+        user_choice = get_level_from_command_prompt(message)
     return user_choice
 
 
